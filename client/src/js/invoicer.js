@@ -17,48 +17,54 @@
             return subtotal;
         }
 
+        $scope.getTax = function(subtotal){
+            var tax = 0;
+            tax = subtotal * 0.07;
+            return tax;
+        }
+
         $scope.addItem = function() {
             $scope.invoice.line_items.push(this.invoice.temp);
             $scope.invoice.temp = {};
         }
 
-       $scope.contentLoaded = true; 
+       $scope.contentLoaded = true;
 
     });
 
-    var work = 
+    var work =
     {
-        bill_type: "Invoice",
+        bill_type: "ใบกำกับภาษี",
+        tax_id: "00000000000",
         number: "1234",
-        send_date: "June 15, 2014",
-        due_date: "June 25, 2014",
-        from_company: "My Company Name",
-        from_address: "123 N6th St., STE 5",
-        from_city: "Brooklyn",
-        from_state: "NY",
-        from_zip: "11211",
-        from_phone: "(123) 555-5273",
-        from_email: "my.email@address.com",
-        to_company: "John Client",
-        to_address: "456 N6th St.",
-        to_city: "Brooklyn",
-        to_state: "NY",
-        to_zip: "11211",
+        send_date: "15 กันยายน, 2560",
+        due_date: "25 กันยายน, 2560",
+        from_company: "ชัยกลกิจ",
+        from_address: "730/10 ถ. จันท์ บางโคล่",
+        from_city: "ยานนาวา",
+        from_state: "กรุงเทพฯ",
+        from_zip: "10120",
+        from_phone: "081-869-8851",
+        from_email: "chaikolkit@gmail.com",
+        to_company: "บริษัทผลิตภัณฑ์ตราเพชร จำกัด มหาชน",
+        to_address: "69-70 หมู่ 1 ถ. มิตรภาพ ตลิ่งชัน",
+        to_city: "เมือง",
+        to_state: "สระบุรี",
+        to_zip: "18000",
         to_phone: "(555) 111-2222",
         to_email: "their.email@address.com",
-        client_deposit: "50",
         line_items: [
             {
-                title: "Merge Sort",
-                desc: "Typed the git merge command",
+                title: "Item 1",
+                desc: "ขนาด 2x10",
                 hours: "2",
-                unit_price: "150"
+                unit_price: "200"
             },
             {
-                title: "Merge Sort",
-                desc: "Typed the git merge command",
+                title: "Item 2",
+                desc: "ขนาด 2x5",
                 hours: "2",
-                unit_price: "150"
+                unit_price: "50"
             },
         ]
     };

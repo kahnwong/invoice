@@ -34,20 +34,21 @@
                 <address>
                     <span editable-text="invoice.from_address">{{invoice.from_address || 'Address'}}</span><br>
                     <span editable-text="invoice.from_city">{{invoice.from_city || 'City'}}</span>, <span editable-text="invoice.from_state">{{invoice.from_state || 'State'}}</span> <span editable-text="invoice.from_zip">{{invoice.from_zip || 'Zip'}}</span><br>
-                    <strong>P</strong>: <span editable-text="invoice.from_phone">{{invoice.from_phone || 'Phone'}}</span><br>
-                    <span editable-text="invoice.from_email">{{invoice.from_email || 'some@email.com'}}</span>
+                    <strong>โทร</strong>: <span editable-text="invoice.from_phone">{{invoice.from_phone || 'Phone'}}</span><br>
+                    <span editable-text="invoice.from_email">{{invoice.from_email || 'some@email.com'}}</span><br>
+                    <strong>เลขที่ประจำตัวผู้เสียภาษีอากร</strong>: <br><span editable-text="invoice.tax_id">{{invoice.tax_id || 'Tax ID'}}</span><br>
                 </address>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <h4>Client:</h4>
+                <h4>ลูกค้า:</h4>
                 <address>
                     <strong><span editable-text="invoice.to_company">{{invoice.to_company || 'Client'}}</span></strong><br>
                     <span editable-text="invoice.to_address">{{invoice.to_address || 'Address'}}</span><br>
                     <span editable-text="invoice.to_city">{{invoice.to_city || 'City'}}</span>, <span editable-text="invoice.to_state">{{invoice.to_state || 'State'}}</span> <span editable-text="invoice.to_zip">{{invoice.to_zip || 'Zip'}}</span><br>
-                    <strong>P</strong>: <span editable-text="invoice.to_phone">{{invoice.to_phone || 'Phone'}}</span><br>
+                    <strong>โทร</strong>: <span editable-text="invoice.to_phone">{{invoice.to_phone || 'Phone'}}</span><br>
                     <span editable-text="invoice.to_email">{{invoice.to_email || 'some@email.com'}}</span>
                 </address>
             </div>
@@ -55,31 +56,31 @@
                 <table class="table-reduce-padding">
                     <tbody>
                         <tr>
-                            <td><p class="h4">Invoice #: </p></td>
+                            <td><p class="h4">เลขที่: </p></td>
                             <td><p class="h5"><strong><span editable-text="invoice.number">{{invoice.number || '####'}}</span></strong></p></td>
                         </tr>
                         <tr>
-                            <td><p class="h5">Date: </p></td>
+                            <td><p class="h5">วันที่: </p></td>
                             <td><p class="h5"><strong><span editable-text="invoice.send_date">{{invoice.send_date || 'January 01, 2014'}}</span></strong></p></td>
                         </tr>
                         <tr>
-                            <td><p class="h5">Due Date: </p></td>
+                            <td><p class="h5">กำหนดจ่าย: </p></td>
                             <td><p class="h5"><strong><span editable-text="invoice.due_date">{{invoice.due_date || 'January 15, 2014'}}</span></strong></p></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div> 
+        </div>
         <div class="row">
             <div class="col-xs-12 box">
                 <table class="table table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th>Item</th>
-                            <th>Task</th>
-                            <th>Hours</th>
-                            <th>Rate</th>
-                            <th>Amount</th>
+                            <th>No.</th>
+                            <th>รายการ</th>
+                            <th>จำนวน</th>
+                            <th>ราคา</th>
+                            <th>รวม</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,8 +93,8 @@
                                 </dl>
                             </td>
                             <td><span editable-text="invoice.line_items[$index].hours" e-style="width: 50px">{{item.hours || '0'}}</span></td>
-                            <td>$<span editable-text="invoice.line_items[$index].unit_price" e-style="width: 50px">{{item.unit_price || '100'}}</span></td>
-                            <td>${{item.hours*item.unit_price}}</td>
+                            <td><span editable-text="invoice.line_items[$index].unit_price" e-style="width: 50px">{{item.unit_price || '100'}}</span> บาท</td>
+                            <td>{{item.hours*item.unit_price}} บาท</td>
                         </tr>
                         <tr id="dynamicInsert" class="warning" ng-show="invoice.temp.title">
                             <td>{{invoice.line_items.length + 1}}</td>
@@ -111,18 +112,18 @@
                     <tfoot class="subtotal">
                         <tr>
                             <td colspan=3></td>
-                            <td><p class="h5">Subtotal: </p></td>
-                            <td><p class="h5"><strong>${{ getSubTotal() }}</strong></p></td>
+                            <td><p class="h5">รวม: </p></td>
+                            <td><p class="h5"><strong>{{ getSubTotal() }}</strong> บาท</p></td>
                         </tr>
                         <tr>
                             <td colspan=3></td>
-                            <td><p class="h5">Deposit: </p></td>
-                            <td><p class="h5"><strong><span editable-text="invoice.client_deposit" e-style="width: 50px">${{invoice.client_deposit || '0'}}</span></strong></p></td>
+                            <td><p class="h5">ภาษี 7%: </p></td>
+                            <td><p class="h5"><strong>{{ getTax(getSubTotal()) }}</strong> บาท</p></td>
                         </tr>
                         <tr>
                             <td colspan=3></td>
-                            <td><p class="h5">Total: </p></td>
-                            <td><p class="h5"><strong>${{ getSubTotal() - invoice.client_deposit }}</strong></p></td>
+                            <td><p class="h5">ยอดสุทธิ: </p></td>
+                            <td><p class="h5"><strong>{{ getSubTotal() + getTax(getSubTotal()) }}</strong> บาท</p></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -133,7 +134,7 @@
         </div>
         <div class="col-xs-6">
             <p class="h3 text-right">
-                Balance Due: ${{ getSubTotal() - invoice.client_deposit }}
+                ยอดค้างชำระ: {{ getSubTotal() + getTax(getSubTotal()) }} บาท
             </p>
         </div>
         <div class="editContainer" ng-mouseenter="showEditor=true" ng-mouseleave="showEditor=false">
