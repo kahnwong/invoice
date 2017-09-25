@@ -20,7 +20,7 @@
         $scope.getTax = function(subtotal){
             var tax = 0;
             tax = subtotal * 0.07;
-            return tax;
+            return Math.round(tax);
         }
 
         $scope.addItem = function() {
