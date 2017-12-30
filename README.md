@@ -24,4 +24,8 @@ The future of this app should include a tool for building, saving and possibly e
  * This is unlike other editable invoice apps where items are secretly input tags that require jumping through hoops to style.
 * Editor and Viewer should share the same template, but the viewer should show no hint that there is an editor involved when sent to a client or printed.
 
+## Added features
+
+Thai localization plus 7% tax.
+
 
