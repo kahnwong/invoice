@@ -1,6 +1,9 @@
 Invoice App
 =======
 
+## Add
+Tax calculation according to Thai Law.
+
 ## Description
 
 Easy to theme tool for generating client invoices. Uses AngularJS and Twitter Bootstrap. Backend TBD
