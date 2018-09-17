@@ -1,7 +1,7 @@
 Invoice App
 =======
 
-## Add
+## Added
 Tax calculation according to Thai Law.
 
 ## Description
